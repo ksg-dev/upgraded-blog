@@ -31,5 +31,8 @@ def get_post(num):
             target_post = blog_post
     return render_template("post.html", post=target_post, image="static/assets/img/" + str(num) + ".jpg")
 
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
