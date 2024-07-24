@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 
 
@@ -30,6 +30,17 @@ def get_post(num):
         if blog_post["id"] == num:
             target_post = blog_post
     return render_template("post.html", post=target_post, image="static/assets/img/" + str(num) + ".jpg")
+
+
+@app.route("/form-entry", methods=["POST", "GET"])
+def receive_data():
+    name = request.form["name"]
+    email = request.form["email"]
+    phone = request.form["phone"]
+    message = request.form["message"]
+    print(f"{name}\n{email}\n{phone}\n{message}")
+    return f"<h1>{name}, Successfully sent your message</h1>"
+
 
 if __name__ == "__main__":
     app.run(debug=True)
