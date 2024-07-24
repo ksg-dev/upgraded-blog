@@ -32,7 +32,6 @@ def get_post(num):
     return render_template("post.html", post=target_post, image="static/assets/img/" + str(num) + ".jpg")
 
 
-@app.route("/form-entry", methods=["POST", "GET"])
 def receive_data():
     name = request.form["name"]
     email = request.form["email"]
@@ -40,6 +39,14 @@ def receive_data():
     message = request.form["message"]
     print(f"{name}\n{email}\n{phone}\n{message}")
     return f"<h1>{name}, Successfully sent your message</h1>"
+
+
+@app.route("/contact", methods=["POST", "GET"])
+def contact():
+    if request.method == "POST":
+        return receive_data()
+    else:
+        return render_template("contact.html")
 
 
 if __name__ == "__main__":
