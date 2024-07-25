@@ -45,7 +45,8 @@ def receive_data(heading_text, sub_text):
     email = request.form["email"]
     phone = request.form["phone"]
     message = request.form["message"]
-    print(f"{name}\n{email}\n{phone}\n{message}")
+    content = f"{name}\n{email}\n{phone}\n{message}"
+    send_email(content)
     return render_template("contact.html", heading_text=heading_text, sub_text=sub_text)
 
 
@@ -63,7 +64,14 @@ def send_email(content):
     subject = "New Contact Form Submitted"
     body = content
 
-    with smtplib.
+    with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+        connection.starttls()
+        connection.login(user=MY_EMAIL, password=PASSWORD)
+        connection.sendmail(
+            from_addr=MY_EMAIL,
+            to_addrs=MY_EMAIL,
+            msg=f"Subject: {subject} \n\n{body}"
+        )
 
 
 
