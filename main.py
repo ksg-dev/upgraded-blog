@@ -1,5 +1,13 @@
 from flask import Flask, render_template, request
 import requests
+import smtplib
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+MY_EMAIL = os.environ["MY_EMAIL"]
+PASSWORD = os.environ["PASSWORD"]
 
 
 
@@ -47,6 +55,16 @@ def contact():
         return receive_data("Successfully sent message.", "Thanks!")
     else:
         return render_template("contact.html")
+
+
+def send_email(content):
+    global MY_EMAIL
+    global PASSWORD
+    subject = "New Contact Form Submitted"
+    body = content
+
+    with smtplib.
+
 
 
 if __name__ == "__main__":
