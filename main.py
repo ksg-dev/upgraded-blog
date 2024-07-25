@@ -32,19 +32,19 @@ def get_post(num):
     return render_template("post.html", post=target_post, image="static/assets/img/" + str(num) + ".jpg")
 
 
-def receive_data():
+def receive_data(heading_text, sub_text):
     name = request.form["name"]
     email = request.form["email"]
     phone = request.form["phone"]
     message = request.form["message"]
     print(f"{name}\n{email}\n{phone}\n{message}")
-    return f"<h1>{name}, Successfully sent your message</h1>"
+    return render_template("contact.html", heading_text=heading_text, sub_text=sub_text)
 
 
 @app.route("/contact", methods=["POST", "GET"])
 def contact():
     if request.method == "POST":
-        return receive_data()
+        return receive_data("Successfully sent message.", "Thanks!")
     else:
         return render_template("contact.html")
 
